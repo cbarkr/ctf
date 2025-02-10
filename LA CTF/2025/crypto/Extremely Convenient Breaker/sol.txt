@@ -1,0 +1,2 @@
+Since it uses ECB mode, we can just decrypt each block separately
+
