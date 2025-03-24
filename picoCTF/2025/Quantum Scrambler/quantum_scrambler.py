@@ -14,7 +14,7 @@ def scramble(L):
   return L
 
 def get_flag():
-  flag = open('temp.txt', 'r').read()
+  flag = open('flag.txt', 'r').read()
   flag = flag.strip()
   hex_flag = []
   for c in flag:
