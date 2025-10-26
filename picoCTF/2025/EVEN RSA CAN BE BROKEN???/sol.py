@@ -2,12 +2,16 @@ from pwn import *
 from gmpy2 import gcd, invert
 
 
+hostname = ...
+port = ...
+
+
 def main():
 	e = 65537
 	items = []
 
 	for i in range(2):
-		conn = remote("verbal-sleep.picoctf.net", 53723)
+		conn = remote(hostname, port)
 		n = conn.recvline()
 		conn.recvline()
 		c = conn.recvline()
