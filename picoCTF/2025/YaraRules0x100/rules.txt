@@ -1,14 +1,16 @@
 rule packed_YaraRules0x100 {
-        strings:
-                $upx1 = "UPX!" ascii
+    strings:
+        $upx1 = "UPX!" ascii
 		$upx2 = "UPX0" ascii
 		$upx3 = "UPX1" ascii
 
-                $str1 = "YaraRules0x100" ascii
-                $str2 = "LoadLibrary" ascii
-                $str3 = "VirtualProtect" ascii
-        condition:
-		uint16(0) == 0x5A4D and
+        $str1 = "YaraRules0x100" ascii
+        $str2 = "LoadLibrary" ascii
+        $str3 = "VirtualProtect" ascii
+    
+    condition:
+        // REF: https://dmfrsecurity.com/2021/12/30/100-days-of-yara-day-11-upx/
+        uint16(0) == 0x5A4D and
 		any of ($upx*) and
 		all of ($str*)
 }
@@ -37,6 +39,7 @@ rule unpacked_YaraRules0x100 {
 		$api12 = "Sleep" ascii
 	
 		$sec1 = "<requestedExecutionLevel level='asInvoker' uiAccess='false' />" ascii
+        
 	condition:
 		any of ($str*) and
 		any of ($in*) and 
